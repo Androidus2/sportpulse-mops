@@ -1,0 +1,17 @@
+# One free web service serves Angular and the API. Database stays in MongoDB Atlas.
+services:
+  - type: web
+    name: sportpulse-mops
+    runtime: docker
+    plan: free
+    region: frankfurt
+    branch: main
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    autoDeployTrigger: checksPass
+    envVars:
+      - key: MONGODB_URI
+        sync: false
+      - key: API_SPORTS_KEY
+        sync: false
