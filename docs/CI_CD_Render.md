@@ -20,6 +20,8 @@ CI nu folosește MongoDB Atlas sau cheia API a echipei. **Nu sunt necesare GitHu
 
 Verificați pe PR cele trei joburi: `Backend tests`, `Frontend tests and build`, `Docker build and smoke test`. După integrare, verificați și rularea de pe `main`, în tab-ul Actions.
 
+**Blocaj identificat la prima rulare (14.11.2026):** GitHub a refuzat pornirea joburilor din cauza blocării contului pentru o problemă de facturare. Nu a fost alocat un runner, iar build-ul Docker nu a rulat. Proprietarul repository-ului trebuie să verifice problema contului în GitHub Billing/Support, apoi să folosească **Actions → CI → Re-run all jobs**. Configurația CI folosește runner-e standard gratuite pentru acest repository public; modificarea YAML-ului sau cumpărarea unei instanțe Render nu rezolvă blocarea contului GitHub. Verificați că problema este rezolvată și rularea de pe `main` trece înainte de a activa primul deploy după CI.
+
 Opțional, proprietarul repository-ului poate configura protecția branch-ului `main` astfel încât aceste verificări să fie obligatorii înaintea integrării. Configurarea necesită permisiuni de administrare.
 
 ### 2. Creați serviciul Render din Blueprint
@@ -65,6 +67,8 @@ După 15 minute fără trafic, Render Free oprește serviciul; o nouă accesare 
 Validare locală: 67 teste backend și 58 teste frontend trecute, build de producție Angular și verificarea pachetului Spring Boot cu fișierele Angular incluse. Smoke test HTTP: health, opt rute frontend, JavaScript/CSS și răspunsuri 404. Chrome izolat pe JAR-ul de producție: program, pagină de meci și reîncărcare directă pentru toate cele trei sporturi, schimbarea sportului și aspect mobil. Blueprint-ul trece validarea cu schema JSON oficială Render. Testele noi verifică rutarea directă fără a intercepta API-ul sau fișierele lipsă. Avertizarea SCSS preexistentă pentru pagina principală rămâne.
 
 Docker nu este instalat pe laptopul de lucru. Validarea imaginii Linux și rularea efectivă sub limita de 512 MB sunt făcute de jobul `Docker build and smoke test`; rezultatul trebuie verificat pe PR înaintea integrării. Validarea locală a JAR-ului și validarea Docker sunt verificări distincte. Configurarea contului Render, a secretelor și a accesului Atlas este efectuată de utilizator, iar verificarea aplicației publice se face după primul deploy.
+
+La prima verificare, joburile GitHub au fost blocate înainte de execuție de problema de facturare a contului menționată mai sus. Imaginea Docker și limita de memorie nu sunt declarate validate până când workflow-ul nu rulează cu succes.
 
 Instrument: OpenAI Codex. Solicitare: automatizarea CI/CD pentru o prezentare independentă de laptop, fără costuri pentru proiectul de facultate. Rezultat: workflow, imagine Docker, suport de rutare/port, Blueprint Render și pași pentru echipă. Nu au fost publicate secrete și nu a fost creat un serviciu plătit.
 
