@@ -13,6 +13,8 @@ Selectorul „Fus orar” folosește implicit zona browserului și poate salva o
 
 ## Rulare locală
 
+Pentru rulare publică, independentă de laptop, sunt disponibile CI GitHub Actions și configurarea unui singur serviciu Render Free. Pașii de conectare a conturilor, secretele necesare și limitele gratuite sunt în [docs/CI_CD_Render.md](docs/CI_CD_Render.md).
+
 Aplicația are două proiecte: [backend/](backend/) (Spring Boot) și [frontend/](frontend/) (Angular). Pentru cerințe și comenzi de pornire, vezi [DEPENDENCIES.md](DEPENDENCIES.md).
 
 ## Etapa I (săptămânile 3–4) – livrabile
